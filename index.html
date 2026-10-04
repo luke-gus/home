@@ -33,16 +33,29 @@
   .btn:focus-visible{outline:3px solid rgba(196,160,51,.7);outline-offset:2px}
   .btn .arr{display:inline-block;margin-left:8px;color:var(--gold)}
   .btn .nw{white-space:nowrap}
-  .card{background:#fff;border:1px solid var(--border);border-top:5px solid var(--navy);margin:30px 40px 34px;padding:28px 34px 28px}
+  .btn2{margin-top:12px;color:var(--navy);background:#fff;border:2px solid var(--navy);border-bottom:4px solid var(--red);padding:15px 16px}
+  .btn2:hover,.btn2:focus-visible{background:var(--paper)}
+  .card{background:#fff;border:1px solid var(--border);border-top:5px solid var(--navy);margin:30px 40px 34px;padding:28px 34px 28px;scroll-margin-top:12px}
+  .card + .card{margin-top:0}
   h2{font-family:var(--serif);color:var(--navy);font-size:30px;line-height:1.2;margin:0 0 10px}
   .lede{margin:0 0 14px;color:var(--ink);font-size:17px;line-height:1.5}
   .rule{height:3px;background:var(--gold);margin:0 0 20px;border:0}
   .field{margin:0 0 16px}
   .row{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
   label{display:block;font-weight:bold;color:var(--navy);font-size:15px;margin:0 0 6px}
-  input[type=text],input[type=email],input[type=tel],textarea{width:100%;font:inherit;font-size:17px;color:var(--ink);background:#fff;border:1px solid #b9c3d0;border-radius:4px;padding:12px 13px;-webkit-appearance:none;appearance:none}
+  input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{width:100%;font:inherit;font-size:17px;color:var(--ink);background:#fff;border:1px solid #b9c3d0;border-radius:4px;padding:12px 13px;-webkit-appearance:none;appearance:none}
   textarea{min-height:140px;resize:vertical;line-height:1.5}
-  input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(196,160,51,.35)}
+  textarea.short{min-height:96px}
+  input[type=date]{min-height:50px;line-height:1.2}
+  select{background-image:linear-gradient(45deg,transparent 50%,var(--navy) 50%),linear-gradient(135deg,var(--navy) 50%,transparent 50%);background-position:calc(100% - 18px) 52%,calc(100% - 12px) 52%;background-size:6px 6px;background-repeat:no-repeat;padding-right:30px}
+  label i{font-style:normal;font-weight:normal;color:var(--muted)}
+  fieldset.choice{border:0;margin:0 0 16px;padding:0;min-width:0}
+  fieldset.choice legend{display:block;font-weight:bold;color:var(--navy);font-size:15px;margin:0 0 8px;padding:0}
+  .opt{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid #b9c3d0;border-radius:4px;padding:12px 13px;margin:0 0 8px;cursor:pointer;font-weight:normal;color:var(--ink);font-size:16px}
+  .opt input{flex:0 0 auto;width:20px;height:20px;margin:0;accent-color:var(--navy)}
+  .opt:has(input:checked){border-color:var(--navy);box-shadow:0 0 0 2px rgba(16,36,67,.15);background:#fbfaf5}
+  .sub{font-weight:bold;color:var(--navy);font-size:15px;margin:4px 0 8px}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(196,160,51,.35)}
   .hp{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
   button.btn[disabled]{opacity:.65;cursor:wait}
   .err{display:none;background:#fdecee;border-left:5px solid var(--red);color:#7a0b1c;padding:12px 16px;margin:0 0 16px;font-size:15px}
@@ -59,6 +72,7 @@
     .cta{margin:16px 8px 0}
     .btn{font-size:17px;letter-spacing:.2px;padding:16px 12px}
     .btn .arr{margin-left:6px}
+    .btn2{margin-top:10px;padding:14px 12px}
     .card{margin:16px 8px 22px;padding:20px 14px 20px}
     h2{font-size:27px}
     .lede{font-size:16px}
@@ -77,41 +91,114 @@
   <main>
     <div class="cta">
       <a class="btn" href="https://signup.lukegustafson.com/">Sign up for daily leadership <span class="nw">briefings<span class="arr" aria-hidden="true">&rsaquo;</span></span></a>
+      <a class="btn btn2" href="#appointment">Request an <span class="nw">appointment<span class="arr" aria-hidden="true">&rsaquo;</span></span></a>
     </div>
 
     <section class="card" id="contact" aria-labelledby="contact-h">
       <h2 id="contact-h">Contact me</h2>
       <p class="lede">I&rsquo;d love to hear from you. Send me a note and I&rsquo;ll get back to you.</p>
       <hr class="rule">
-      <div class="err" id="err" role="alert"></div>
-      <form id="form" action="https://formsubmit.co/luke.gustafson@capitol.tn.gov" method="POST">
+      <div class="err" role="alert"></div>
+      <form data-kind="contact" action="https://formsubmit.co/luke.gustafson@capitol.tn.gov" method="POST">
         <div class="row">
-          <div class="field"><label for="first">First name</label>
-            <input id="first" name="first_name" type="text" autocomplete="given-name" required maxlength="60"></div>
-          <div class="field"><label for="last">Last name</label>
-            <input id="last" name="last_name" type="text" autocomplete="family-name" required maxlength="60"></div>
+          <div class="field"><label for="contact-first">First name</label>
+            <input id="contact-first" name="first_name" type="text" autocomplete="given-name" required maxlength="60"></div>
+          <div class="field"><label for="contact-last">Last name</label>
+            <input id="contact-last" name="last_name" type="text" autocomplete="family-name" required maxlength="60"></div>
         </div>
-        <div class="field"><label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200"></div>
-        <div class="field"><label for="phone">Phone number</label>
-          <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required minlength="10" maxlength="25"></div>
-        <div class="field"><label for="message">Message</label>
-          <textarea id="message" name="message" required maxlength="5000"></textarea></div>
-
+        <div class="field"><label for="contact-email">Email</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200"></div>
+        <div class="field"><label for="contact-phone">Phone number</label>
+          <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required minlength="10" maxlength="25"></div>
+        <div class="field"><label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" required maxlength="5000"></textarea></div>
         <div class="hp" aria-hidden="true">
-          <label for="company_website">Leave this field empty</label>
-          <input id="company_website" name="_honey" type="text" tabindex="-1" autocomplete="off">
+          <label for="contact_website">Leave this field empty</label>
+          <input id="contact_website" name="_honey" type="text" tabindex="-1" autocomplete="off">
         </div>
         <input type="hidden" name="_subject" value="Website contact">
+        <input type="hidden" name="_replyto" value="">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://lukegustafson.com/?sent=1#contact">
+        <input type="hidden" name="_next" value="https://lukegustafson.com/?sent=contact#contact">
         <input type="hidden" name="_url" value="https://lukegustafson.com/">
-        <button class="btn" type="submit" id="submit">Send</button>
+        <button class="btn" type="submit">Send</button>
       </form>
-      <div class="thanks" id="thanks" tabindex="-1">
+      <div class="thanks" tabindex="-1">
         <div class="check" aria-hidden="true">&#10003;</div>
-        <h3 id="thanks-h">Thank you. Your message has been sent.</h3>
+        <h3 class="thanks-h">Thank you. Your message has been sent.</h3>
+      </div>
+    </section>
+
+    <section class="card" id="appointment" aria-labelledby="appt-h">
+      <h2 id="appt-h">Request an appointment</h2>
+      <p class="lede">I&rsquo;d be glad to meet. Share a few details and I&rsquo;ll follow up to confirm a time.</p>
+      <hr class="rule">
+      <div class="err" role="alert"></div>
+      <form data-kind="appt" action="https://formsubmit.co/luke.gustafson@capitol.tn.gov" method="POST">
+        <div class="row">
+          <div class="field"><label for="appt-first">First name</label>
+            <input id="appt-first" name="first_name" type="text" autocomplete="given-name" required maxlength="60"></div>
+          <div class="field"><label for="appt-last">Last name</label>
+            <input id="appt-last" name="last_name" type="text" autocomplete="family-name" required maxlength="60"></div>
+        </div>
+        <div class="field"><label for="appt-email">Email</label>
+          <input id="appt-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200"></div>
+        <div class="field"><label for="appt-phone">Phone number</label>
+          <input id="appt-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required minlength="10" maxlength="25"></div>
+        <div class="field"><label for="appt-org">Organization <i>(optional)</i></label>
+          <input id="appt-org" name="organization" type="text" autocomplete="organization" maxlength="150"></div>
+        <div class="field"><label for="appt-topic">Topic or purpose</label>
+          <textarea id="appt-topic" class="short" name="topic" required maxlength="2000"></textarea></div>
+
+        <div class="sub">Preferred date and time</div>
+        <div class="row">
+          <div class="field"><label class="sr" for="appt-date1">Preferred date</label>
+            <input id="appt-date1" name="preferred_date" type="date" required></div>
+          <div class="field"><label class="sr" for="appt-time1">Preferred time</label>
+            <select id="appt-time1" name="preferred_time" required>
+              <option value="" selected disabled>Choose a time</option>
+              <option>Morning (8 to 11 AM)</option>
+              <option>Midday (11 AM to 1 PM)</option>
+              <option>Afternoon (1 to 5 PM)</option>
+              <option>Any time</option>
+            </select></div>
+        </div>
+        <div class="sub">Second choice <i style="font-weight:normal;color:var(--muted);font-style:normal">(optional)</i></div>
+        <div class="row">
+          <div class="field"><label class="sr" for="appt-date2">Second choice date</label>
+            <input id="appt-date2" name="second_choice_date" type="date"></div>
+          <div class="field"><label class="sr" for="appt-time2">Second choice time</label>
+            <select id="appt-time2" name="second_choice_time">
+              <option value="" selected>Choose a time</option>
+              <option>Morning (8 to 11 AM)</option>
+              <option>Midday (11 AM to 1 PM)</option>
+              <option>Afternoon (1 to 5 PM)</option>
+              <option>Any time</option>
+            </select></div>
+        </div>
+
+        <fieldset class="choice">
+          <legend>Meeting type</legend>
+          <label class="opt"><input type="radio" name="meeting_type" value="In person at the Capitol or Cordell Hull" required> <span>In person at the Capitol or Cordell Hull</span></label>
+          <label class="opt"><input type="radio" name="meeting_type" value="Phone call"> <span>Phone call</span></label>
+          <label class="opt"><input type="radio" name="meeting_type" value="Video call"> <span>Video call</span></label>
+        </fieldset>
+        <div class="field"><label for="appt-loc">Location preference <i>(optional)</i></label>
+          <input id="appt-loc" name="location_preference" type="text" maxlength="200"></div>
+        <div class="hp" aria-hidden="true">
+          <label for="appt_website">Leave this field empty</label>
+          <input id="appt_website" name="_honey" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="_subject" value="Appointment request">
+        <input type="hidden" name="_replyto" value="">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://lukegustafson.com/?sent=appt#appointment">
+        <input type="hidden" name="_url" value="https://lukegustafson.com/">
+        <button class="btn" type="submit">Request appointment</button>
+      </form>
+      <div class="thanks" tabindex="-1">
+        <div class="check" aria-hidden="true">&#10003;</div>
+        <h3 class="thanks-h">Thank you. I&rsquo;ll follow up to confirm a time.</h3>
       </div>
     </section>
   </main>
@@ -122,54 +209,55 @@
 
 <script>
 (function(){
-  // FormSubmit AJAX endpoint. After the one-time activation, FormSubmit provides a random alias string
-  // that can replace the email address here and in the form action.
-  var FORM_ENDPOINT = "https://formsubmit.co/ajax/luke.gustafson@capitol.tn.gov";
-  var card = document.getElementById("contact"), form = document.getElementById("form");
-  var err = document.getElementById("err"), btn = document.getElementById("submit");
+  // Forms post to FormSubmit's standard endpoint (not AJAX) so FormSubmit shows its reCAPTCHA
+  // check before delivering, then returns the visitor here via _next. Honeypot (_honey) and a
+  // short time-trap filter simple bots before they reach FormSubmit.
+  var LOADED = Date.now(), MIN_MS = 3000;
   var here = location.origin + location.pathname;
-  form.elements["_next"].value = here + "?sent=1#contact";
-  form.elements["_url"].value = here;
+  var COPY = {
+    contact: {subject: "Website contact: ", thanks: function(n){ return "Thank you, " + n + ". Your message has been sent."; }, anchor: "contact"},
+    appt:    {subject: "Appointment request: ", thanks: function(n){ return "Thank you, " + n + ". I\u2019ll follow up to confirm a time."; }, anchor: "appointment"}
+  };
 
-  function showThanks(first){
-    if (first) document.getElementById("thanks-h").textContent = "Thank you, " + first + ". Your message has been sent.";
+  // Earliest selectable date: today in Central time.
+  var today = new Date().toLocaleDateString("en-CA", {timeZone: "America/Chicago"});
+  document.querySelectorAll('input[type=date]').forEach(function(d){ d.min = today; });
+
+  function showThanks(kind, first){
+    var card = document.getElementById(COPY[kind].anchor);
+    if (first) card.querySelector(".thanks-h").textContent = COPY[kind].thanks(first);
     card.classList.add("sent");
     card.scrollIntoView({block: "start"});
-    document.getElementById("thanks").focus({preventScroll: true});
+    card.querySelector(".thanks").focus({preventScroll: true});
   }
-  if (/[?&]sent=1/.test(location.search)) showThanks("");
+  var q = new URLSearchParams(location.search), sent = q.get("sent");
+  if (sent === "1") sent = "contact";
+  if (COPY[sent]) showThanks(sent, (q.get("n") || "").slice(0, 60));
 
-  function fail(msg){ err.textContent = msg; err.style.display = "block"; btn.disabled = false; btn.textContent = "Send"; err.scrollIntoView({block: "center"}); }
-
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    err.style.display = "none";
-    var f = form.elements;
-    var first = f["first_name"].value.trim(), last = f["last_name"].value.trim();
-    // Honeypot: real people never see this field. Pretend success and send nothing.
-    if (f["_honey"].value) { showThanks(first); return; }
-
-    btn.disabled = true; btn.textContent = "Sending...";
-    var payload = {};
-    new FormData(form).forEach(function(v, k){ if (k !== "_next") payload[k] = typeof v === "string" ? v.trim() : v; });
-    payload._subject = "Website contact: " + first + " " + last;
-    payload._replyto = payload.email;
-    payload._template = "table";
-    payload._captcha = "false";
-    payload._honey = "";
-    fetch(FORM_ENDPOINT, {
-      method: "POST",
-      headers: {"Content-Type": "application/json", "Accept": "application/json"},
-      body: JSON.stringify(payload)
-    }).then(function(r){ return r.json().catch(function(){ return {}; }); })
-      .then(function(d){
-        var ok = d && (d.success === true || d.success === "true");
-        var pending = d && /activat/i.test(d.message || "");  // held by FormSubmit until activation
-        if (ok || pending) showThanks(first);
-        else fail("Sorry, your message could not be sent just now. Please try again in a few minutes.");
-      })
-      .catch(function(){ fail("Sorry, your message could not be sent. Please check your connection and try again."); });
+  document.querySelectorAll("form[data-kind]").forEach(function(form){
+    var kind = form.getAttribute("data-kind"), card = form.closest(".card");
+    var err = card.querySelector(".err"), btn = form.querySelector("button[type=submit]"), label = btn.textContent;
+    function fail(msg){ err.textContent = msg; err.style.display = "block"; err.scrollIntoView({block: "center"}); }
+    form.addEventListener("submit", function(e){
+      err.style.display = "none";
+      var f = form.elements;
+      var first = f["first_name"].value.trim(), last = f["last_name"].value.trim();
+      if (f["_honey"].value) { e.preventDefault(); showThanks(kind, first); return; }   // bot: pretend success
+      if (Date.now() - LOADED < MIN_MS) { e.preventDefault(); fail("Please take a moment to review your details, then press " + label + " again."); return; }
+      var d1 = f["preferred_date"], d2 = f["second_choice_date"];
+      if (d1 && d1.value && d1.value < today) { e.preventDefault(); fail("Please choose a date that is today or later."); return; }
+      if (d2 && d2.value && !f["second_choice_time"].value) { e.preventDefault(); fail("Please choose a time for your second choice date, or clear that date."); return; }
+      for (var i = 0; i < f.length; i++) if (f[i].type === "text" || f[i].tagName === "TEXTAREA") f[i].value = f[i].value.trim();
+      f["_subject"].value = COPY[kind].subject + first + " " + last;
+      f["_replyto"].value = f["email"].value;
+      f["_url"].value = here;
+      f["_next"].value = here + "?sent=" + kind + "&n=" + encodeURIComponent(first) + "#" + COPY[kind].anchor;
+      btn.disabled = true; btn.textContent = "Sending...";
+      // Normal form POST continues to FormSubmit, which shows its "I'm not a robot" check.
+    });
   });
+  // If the visitor comes back with the Back button, re-enable the buttons.
+  window.addEventListener("pageshow", function(){ document.querySelectorAll("form[data-kind] button[type=submit]").forEach(function(b){ b.disabled = false; b.textContent = b.closest("form").getAttribute("data-kind") === "appt" ? "Request appointment" : "Send"; }); });
 })();
 </script>
 </body>
