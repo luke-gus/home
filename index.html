@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Luke Gustafson</title>
+<meta name="description" content="Luke Gustafson">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#102443">
+<link rel="canonical" href="https://lukegustafson.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Luke Gustafson">
+<meta property="og:url" content="https://lukegustafson.com/">
+<meta property="og:image" content="https://lukegustafson.com/banner-home.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23102443'/%3E%3Crect y='52' width='64' height='5' fill='%23c8102e'/%3E%3Ctext x='32' y='42' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='30' fill='%23f7f0dc' text-anchor='middle'%3ELG%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="image" href="banner-home.jpg">
+<style>
+  :root{
+    --navy:#102443; --red:#c8102e; --gold:#c4a033; --paper:#f7f0dc; --cream:#fbfaf5; --ink:#25303d;
+    --muted:#5f6a7a; --border:#d9dfe6; --foot:#c2cede;
+    --sans:Arial,Helvetica,sans-serif; --serif:Georgia,'Times New Roman',serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55}
+  .wrap{max-width:760px;margin:0 auto;background:var(--cream);box-shadow:0 0 0 1px rgba(16,36,67,.06),0 12px 40px rgba(16,36,67,.10)}
+  .banner{display:block;width:100%;height:auto;aspect-ratio:1200/450;background:#faf7f2}
+  .sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .cta{margin:30px 40px 0}
+  .btn{display:block;width:100%;font:inherit;font-size:19px;font-weight:bold;letter-spacing:.5px;text-align:center;text-decoration:none;color:#fff;background:var(--navy);border:0;border-bottom:4px solid var(--red);border-radius:4px;padding:17px 18px;cursor:pointer}
+  .btn:hover,.btn:focus-visible{background:#1a3560}
+  .btn:focus-visible{outline:3px solid rgba(196,160,51,.7);outline-offset:2px}
+  .btn .arr{display:inline-block;margin-left:8px;color:var(--gold)}
+  .card{background:#fff;border:1px solid var(--border);border-top:5px solid var(--navy);margin:30px 40px 34px;padding:28px 34px 28px}
+  h2{font-family:var(--serif);color:var(--navy);font-size:30px;line-height:1.2;margin:0 0 10px}
+  .rule{height:3px;background:var(--gold);margin:0 0 20px;border:0}
+  .field{margin:0 0 16px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  label{display:block;font-weight:bold;color:var(--navy);font-size:15px;margin:0 0 6px}
+  input[type=text],input[type=email],input[type=tel],textarea{width:100%;font:inherit;font-size:17px;color:var(--ink);background:#fff;border:1px solid #b9c3d0;border-radius:4px;padding:12px 13px;-webkit-appearance:none;appearance:none}
+  textarea{min-height:140px;resize:vertical;line-height:1.5}
+  input:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(196,160,51,.35)}
+  .hp{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
+  button.btn[disabled]{opacity:.65;cursor:wait}
+  .err{display:none;background:#fdecee;border-left:5px solid var(--red);color:#7a0b1c;padding:12px 16px;margin:0 0 16px;font-size:15px}
+  .thanks{display:none}
+  .thanks .check{width:52px;height:52px;border-radius:50%;background:var(--paper);border:3px solid var(--gold);color:var(--navy);font-size:28px;line-height:46px;text-align:center;margin:0 0 14px}
+  .thanks h3{font-family:var(--serif);color:var(--navy);font-size:24px;line-height:1.3;margin:0}
+  .sent .thanks{display:block}
+  .sent form,.sent .err{display:none!important}
+  .goldband{height:5px;background:var(--gold)}
+  footer{background:var(--navy);color:var(--foot);padding:18px 40px 20px;font-size:13px;line-height:1.6}
+  @media (max-width:640px){
+    body{font-size:16px;background:var(--cream)}
+    .wrap{box-shadow:none}
+    .cta{margin:16px 8px 0}
+    .btn{font-size:18px;padding:16px 14px}
+    .card{margin:16px 8px 22px;padding:20px 14px 20px}
+    h2{font-size:27px}
+    .row{gap:0 10px}
+    footer{padding:16px 14px 20px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 class="sr">Luke Gustafson</h1>
+    <img class="banner" src="banner-home.jpg" width="1200" height="450" alt="Luke Gustafson">
+  </header>
+
+  <main>
+    <div class="cta">
+      <a class="btn" href="https://signup.lukegustafson.com/">Sign up for briefings<span class="arr" aria-hidden="true">&rsaquo;</span></a>
+    </div>
+
+    <section class="card" id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <hr class="rule">
+      <div class="err" id="err" role="alert"></div>
+      <form id="form" action="https://formsubmit.co/luke.gustafson@capitol.tn.gov" method="POST">
+        <div class="row">
+          <div class="field"><label for="first">First name</label>
+            <input id="first" name="first_name" type="text" autocomplete="given-name" required maxlength="60"></div>
+          <div class="field"><label for="last">Last name</label>
+            <input id="last" name="last_name" type="text" autocomplete="family-name" required maxlength="60"></div>
+        </div>
+        <div class="field"><label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200"></div>
+        <div class="field"><label for="phone">Phone number</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required minlength="10" maxlength="25"></div>
+        <div class="field"><label for="message">Message</label>
+          <textarea id="message" name="message" required maxlength="5000"></textarea></div>
+
+        <div class="hp" aria-hidden="true">
+          <label for="company_website">Leave this field empty</label>
+          <input id="company_website" name="_honey" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="_subject" value="Website contact">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://lukegustafson.com/?sent=1#contact">
+        <input type="hidden" name="_url" value="https://lukegustafson.com/">
+        <button class="btn" type="submit" id="submit">Send</button>
+      </form>
+      <div class="thanks" id="thanks" tabindex="-1">
+        <div class="check" aria-hidden="true">&#10003;</div>
+        <h3 id="thanks-h">Thank you. Your message has been sent.</h3>
+      </div>
+    </section>
+  </main>
+
+  <div class="goldband"></div>
+  <footer>&copy; 2026 Luke Gustafson</footer>
+</div>
+
+<script>
+(function(){
+  // FormSubmit AJAX endpoint. After the one-time activation, FormSubmit provides a random alias string
+  // that can replace the email address here and in the form action.
+  var FORM_ENDPOINT = "https://formsubmit.co/ajax/luke.gustafson@capitol.tn.gov";
+  var card = document.getElementById("contact"), form = document.getElementById("form");
+  var err = document.getElementById("err"), btn = document.getElementById("submit");
+  var here = location.origin + location.pathname;
+  form.elements["_next"].value = here + "?sent=1#contact";
+  form.elements["_url"].value = here;
+
+  function showThanks(first){
+    if (first) document.getElementById("thanks-h").textContent = "Thank you, " + first + ". Your message has been sent.";
+    card.classList.add("sent");
+    card.scrollIntoView({block: "start"});
+    document.getElementById("thanks").focus({preventScroll: true});
+  }
+  if (/[?&]sent=1/.test(location.search)) showThanks("");
+
+  function fail(msg){ err.textContent = msg; err.style.display = "block"; btn.disabled = false; btn.textContent = "Send"; err.scrollIntoView({block: "center"}); }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    err.style.display = "none";
+    var f = form.elements;
+    var first = f["first_name"].value.trim(), last = f["last_name"].value.trim();
+    // Honeypot: real people never see this field. Pretend success and send nothing.
+    if (f["_honey"].value) { showThanks(first); return; }
+
+    btn.disabled = true; btn.textContent = "Sending...";
+    var payload = {};
+    new FormData(form).forEach(function(v, k){ if (k !== "_next") payload[k] = typeof v === "string" ? v.trim() : v; });
+    payload._subject = "Website contact: " + first + " " + last;
+    payload._replyto = payload.email;
+    payload._template = "table";
+    payload._captcha = "false";
+    payload._honey = "";
+    fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: {"Content-Type": "application/json", "Accept": "application/json"},
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.json().catch(function(){ return {}; }); })
+      .then(function(d){
+        var ok = d && (d.success === true || d.success === "true");
+        var pending = d && /activat/i.test(d.message || "");  // held by FormSubmit until activation
+        if (ok || pending) showThanks(first);
+        else fail("Sorry, your message could not be sent just now. Please try again in a few minutes.");
+      })
+      .catch(function(){ fail("Sorry, your message could not be sent. Please check your connection and try again."); });
+  });
+})();
+</script>
+</body>
+</html>
