@@ -122,7 +122,6 @@
           <input id="contact_website" name="_honey" type="text" tabindex="-1" autocomplete="off">
         </div>
         <input type="hidden" name="_subject" value="Website contact">
-        <input type="hidden" name="_autoresponse" value="Thank you for reaching out. I&rsquo;ve received your message and will get back to you soon.&#10;&#10;Luke Gustafson&#10;Office of Senate Majority Leader Jack Johnson">
         <input type="hidden" name="_replyto" value="">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_cc" value="gustafson.luke@gmail.com">
@@ -197,7 +196,6 @@
           <input id="appt_website" name="_honey" type="text" tabindex="-1" autocomplete="off">
         </div>
         <input type="hidden" name="_subject" value="Appointment request">
-        <input type="hidden" name="_autoresponse" value="Thank you for your appointment request. I&rsquo;ve received it and will follow up to confirm a time that works. Please note that your request isn&rsquo;t confirmed until you hear back from me.&#10;&#10;Luke Gustafson&#10;Office of Senate Majority Leader Jack Johnson">
         <input type="hidden" name="_replyto" value="">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_cc" value="gustafson.luke@gmail.com">
@@ -239,9 +237,32 @@
     card.scrollIntoView({block: "start"});
     card.querySelector(".thanks").focus({preventScroll: true});
   }
+  // Branded confirmation email (Cloudflare Worker + Resend). The submitted values are stashed in
+  // sessionStorage on submit and sent only when FormSubmit returns the visitor here via _next (i.e. it
+  // accepted the submission). The stash is removed first, so a reload or Back cannot send twice.
+  var CONFIRM_URL = "https://lukegustafson-confirm.lukegustafson.workers.dev/", TS_KEY = "0x4AAAAAAFNtQfKumzD-K5-u";
+  function turnstile(action, box, cb){
+    var go = function(){ var el = document.createElement("div"); box.appendChild(el);
+      window.turnstile.render(el, {sitekey: TS_KEY, action: action, appearance: "interaction-only", callback: cb}); };
+    if (window.turnstile) return go();
+    var s = document.createElement("script");
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"; s.async = true; s.onload = go;
+    document.head.appendChild(s);
+  }
+  function sendConfirm(kind){
+    var p; try { p = JSON.parse(sessionStorage.getItem("lg_confirm") || "null"); sessionStorage.removeItem("lg_confirm"); } catch (x) { return; }
+    if (!p || p.kind !== kind || Date.now() - p.t > 30 * 60 * 1000) return;
+    try {
+      turnstile(kind, document.getElementById(COPY[kind].anchor).querySelector(".thanks"), function(tok){
+        p.turnstile = tok;
+        fetch(CONFIRM_URL, {method: "POST", headers: {"Content-Type": "text/plain"}, body: JSON.stringify(p), keepalive: true}).catch(function(){});
+      });
+    } catch (x) {}
+  }
+
   var q = new URLSearchParams(location.search), sent = q.get("sent");
   if (sent === "1") sent = "contact";
-  if (COPY[sent]) showThanks(sent, (q.get("n") || "").slice(0, 60));
+  if (COPY[sent]) { showThanks(sent, (q.get("n") || "").slice(0, 60)); sendConfirm(sent); }
 
   document.querySelectorAll("form[data-kind]").forEach(function(form){
     var kind = form.getAttribute("data-kind"), card = form.closest(".card");
@@ -261,6 +282,12 @@
       f["_replyto"].value = f["email"].value;
       f["_url"].value = here;
       f["_next"].value = here + "?sent=" + kind + "&n=" + encodeURIComponent(first) + "#" + COPY[kind].anchor;
+      try {
+        var data = {};
+        new FormData(form).forEach(function(v, k){ if (k.charAt(0) !== "_") data[k] = String(v).trim(); });
+        sessionStorage.setItem("lg_confirm", JSON.stringify({kind: kind, t: Date.now(), data: data,
+          id: (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2)}));
+      } catch (x) {}
       btn.disabled = true; btn.textContent = "Sending...";
       // Normal form POST continues to FormSubmit, which shows its "I'm not a robot" check.
     });
