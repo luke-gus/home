@@ -32,6 +32,7 @@
   .btn:hover,.btn:focus-visible{background:#1a3560}
   .btn:focus-visible{outline:3px solid rgba(196,160,51,.7);outline-offset:2px}
   .btn .arr{display:inline-block;margin-left:8px;color:var(--gold)}
+  .btn .nw{white-space:nowrap}
   .card{background:#fff;border:1px solid var(--border);border-top:5px solid var(--navy);margin:30px 40px 34px;padding:28px 34px 28px}
   h2{font-family:var(--serif);color:var(--navy);font-size:30px;line-height:1.2;margin:0 0 10px}
   .lede{margin:0 0 14px;color:var(--ink);font-size:17px;line-height:1.5}
@@ -56,7 +57,8 @@
     body{font-size:16px;background:var(--cream)}
     .wrap{box-shadow:none}
     .cta{margin:16px 8px 0}
-    .btn{font-size:18px;padding:16px 14px}
+    .btn{font-size:17px;letter-spacing:.2px;padding:16px 12px}
+    .btn .arr{margin-left:6px}
     .card{margin:16px 8px 22px;padding:20px 14px 20px}
     h2{font-size:27px}
     .lede{font-size:16px}
@@ -74,7 +76,7 @@
 
   <main>
     <div class="cta">
-      <a class="btn" href="https://signup.lukegustafson.com/">Sign up for daily leadership briefings<span class="arr" aria-hidden="true">&rsaquo;</span></a>
+      <a class="btn" href="https://signup.lukegustafson.com/">Sign up for daily leadership <span class="nw">briefings<span class="arr" aria-hidden="true">&rsaquo;</span></span></a>
     </div>
 
     <section class="card" id="contact" aria-labelledby="contact-h">
